@@ -1,0 +1,63 @@
+############################################################################
+# apps/led_control/Kconfig
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.  The
+# ASF licenses this file to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance with the
+# License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+############################################################################
+
+config EXAMPLES_LED_CONTROL
+    bool "Simple LED Control Application"
+    default n
+    depends on USERLED
+    ---help---
+        Enable the simple LED control application for XIAO RP2350 board.
+
+        This application provides basic LED control functions:
+        - LED on/off control
+        - LED blinking with custom period
+
+        Note:
+        - Requires USERLED and USERLED_LOWER to be enabled in NuttX.
+        - ARCH_LEDS should be disabled to avoid conflicts with board LEDs.
+
+if EXAMPLES_LED_CONTROL
+
+config EXAMPLES_LED_CONTROL_PRIORITY
+	int "LED Control task priority"
+	default 100
+	# Keep priority moderate to avoid starving system tasks.
+
+config EXAMPLES_LED_CONTROL_STACKSIZE
+	int "LED Control stack size"
+	default 2048
+	# 2KB is sufficient for simple CLI parsing and ioctl calls.
+
+endif
+
+config LED_CONTROL
+    bool
+    default EXAMPLES_LED_CONTROL
+    # Mirror symbol used for build system convenience.
+
+config LED_CONTROL_PRIORITY
+    int
+    default EXAMPLES_LED_CONTROL_PRIORITY
+    # Mirror symbol for Makefile to avoid direct dependency on Kconfig names.
+
+config LED_CONTROL_STACKSIZE
+    int
+    default EXAMPLES_LED_CONTROL_STACKSIZE
+    # Mirror symbol for Makefile to avoid direct dependency on Kconfig names.
