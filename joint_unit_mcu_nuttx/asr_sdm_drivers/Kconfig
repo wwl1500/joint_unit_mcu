@@ -1,0 +1,7 @@
+menu "ASR SDM Drivers"
+
+source "$APPSDIR/asr_sdm_drivers/icm42688/Kconfig"
+
+endmenu
+
+
