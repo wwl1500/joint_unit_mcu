@@ -1,0 +1,13 @@
+config ASR_SDM_DRIVERS_ICM42688
+	bool "ICM42688 driver"
+	default n
+	help
+	  Enable ASR SDM ICM42688 driver built in apps tree.
+
+if ASR_SDM_DRIVERS_ICM42688
+
+# 可在此添加更多可配置项（如 ODR、DLPF、FIFO 开关等）
+
+endif
+
+
