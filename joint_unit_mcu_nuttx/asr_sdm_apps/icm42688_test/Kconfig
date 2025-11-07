@@ -1,0 +1,38 @@
+############################################################################
+# apps/icm42688_test/Kconfig
+############################################################################
+
+config EXAMPLES_ICM42688_TEST
+    bool "ICM-42688 basic test app (I2C)"
+    default n
+    ---help---
+        Enable a simple test application that initializes I2C1@0x68,
+        registers an ICM-42688 driver at /dev/imu0 and periodically reads
+        accel/gyro raw data and prints it.
+
+if EXAMPLES_ICM42688_TEST
+
+config EXAMPLES_ICM42688_TEST_PRIORITY
+    int "Task priority"
+    default 100
+
+config EXAMPLES_ICM42688_TEST_STACKSIZE
+    int "Stack size"
+    default 2048
+
+endif
+
+# Mirror symbols for Makefile convenience
+config ICM42688_TEST
+    bool
+    default EXAMPLES_ICM42688_TEST
+
+config ICM42688_TEST_PRIORITY
+    int
+    default EXAMPLES_ICM42688_TEST_PRIORITY
+
+config ICM42688_TEST_STACKSIZE
+    int
+    default EXAMPLES_ICM42688_TEST_STACKSIZE
+
+
